@@ -9,9 +9,9 @@ provided the copyright notice and this notice are preserved.  This file is offer
 void version()
 {
 	int MainVersion=2;
-	int SubVersion=0;
-	char Build='c';
-	printf("Welcome to TIC-TAC-TOE version %d.%d%c\nAuthor: BAI (lem-ma)\n",MainVersion,SubVersion,Build);
+	int SubVersion=1;
+	char Build=' ';
+	printf("Welcome to TIC-TAC-TOE version %d.%d%c\nAuthor: BAI (lem-ma on GitHub)\n",MainVersion,SubVersion,Build);
 }
 
 char change(int ori)
@@ -152,16 +152,18 @@ char two()
 	{
 		state[i]=-1;
 	}
+	int round=1;
 	int result=-1;
-	for(int round=1;round<=9;round++)
+	while(round<10)
 	{
+		printboard(state,round);
+		getinput(state,round);
 		if(havewon(state)!=-1)
 		{
 			result=havewon(state);
 			break;
 		}
-		printboard(state,round);
-		getinput(state,round);
+		round++;
 	}
 	printboard(state,-1);
 	free(state);
@@ -264,14 +266,10 @@ char ai()
 	{
 		tt=0;
 	}
+	int round=1;
 	int result=-1;
-	for(int round=1;round<=9;round++)
+	while(round<10)
 	{
-		if(havewon(state)!=-1)
-		{
-			result=havewon(state);
-			break;
-		}
 		if(tt==round%2)
 		{
 			printboard(state,round);
@@ -281,6 +279,12 @@ char ai()
 		{
 			aiinput(state,tt);
 		}
+		if(havewon(state)!=-1)
+		{
+			result=havewon(state);
+			break;
+		}
+		round++;
 	}
 	printboard(state,-1);
 	free(state);
