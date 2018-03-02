@@ -10,7 +10,7 @@ void version()
 {
 	int MainVersion=2;
 	int SubVersion=1;
-	char Build=' ';
+	char Build='a';
 	printf("Welcome to TIC-TAC-TOE version %d.%d%c\nAuthor: BAI (lem-ma on GitHub)\n",MainVersion,SubVersion,Build);
 }
 
@@ -26,6 +26,7 @@ char change(int ori)
 			break;
 		default:
 			return ' ';
+			break;
 	}
 }
 
@@ -319,21 +320,13 @@ void game()
 int main(void)
 {
 	version();
-	game();
-	char resp;
-	while(1)
+	char resp=0;
+	while(resp!='n')
 	{
+		game();
 		printf("Enter \"n\" to exist, enter any other key to start a new game.\n");
 		getchar();
 		scanf("%c",&resp);
-		if(resp=='n')
-		{
-			break;
-		}
-		else
-		{
-			game();
-		}
 	}
 	printf("Thanks for gaming. Enter any key to continue.\n");
 	getchar();
