@@ -11,7 +11,7 @@ void version()
 	int MainVersion=2;
 	int SubVersion=0;
 	char Build='c';
-	printf("Welcome to TIC-TAC-TOE version %d.%d%c\nAuthor: BAI\n",MainVersion,SubVersion,Build);
+	printf("Welcome to TIC-TAC-TOE version %d.%d%c\nAuthor: BAI (lem-ma)\n",MainVersion,SubVersion,Build);
 }
 
 char change(int ori)
