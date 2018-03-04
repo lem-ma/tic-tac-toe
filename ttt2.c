@@ -10,7 +10,7 @@ void version()
 {
 	int MainVersion=2;
 	int SubVersion=1;
-	char Build='a';
+	char Build='b';
 	printf("Welcome to TIC-TAC-TOE version %d.%d%c\nAuthor: BAI (lem-ma on GitHub)\n",MainVersion,SubVersion,Build);
 }
 
@@ -220,31 +220,14 @@ void aiinput(int* st,int ur)
 	}
 	if(!done)
 	{
-		if(st[4]==-1)
+		int choice[]={4,0,2,6,8,1,4,5,7};
+		int j;
+		for(int i=0;i<9;i++)
 		{
-			st[4]=machine;
-			done=1;
-		}
-		else
-		{
-			for(int i=0;i<9;i++)
+			j=choice[i];
+			if(st[j]==-1)
 			{
-				if((i==0||i==2||i==6||i==8)&&(st[i]==-1))
-				{
-					st[i]=machine;
-					done=1;
-					break;
-				}
-			}
-		}
-	}
-	if(!done)
-	{
-		for(int i=1;i<=7;i++)
-		{
-			if((i!=2)&&(i!=6)&&(st[i]==-1))
-			{
-				st[i]=machine;
+				st[j]=machine;
 				break;
 			}
 		}
