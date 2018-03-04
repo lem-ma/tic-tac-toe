@@ -10,7 +10,7 @@ void version()
 {
 	int MainVersion=2;
 	int SubVersion=1;
-	char Build='c';
+	char Build='d';
 	printf("Welcome to TIC-TAC-TOE version %d.%d%c\nAuthor: BAI (lem-ma on GitHub)\n",MainVersion,SubVersion,Build);
 }
 
@@ -97,49 +97,27 @@ void getinput(int* st,int rd)
 int havewon(int* st)
 {
 	int winner=-1;
-	int done=0;
-	for(int i=0;i<9;i++)
+	int i,j,k;
+	int config[8][3]=
 	{
-		if(st[i]!=-1)
+		{0,1,2},
+		{3,4,5},
+		{6,7,8},
+		{0,3,6},
+		{1,4,7},
+		{2,5,8},
+		{0,4,8},
+		{2,4,6}
+	};
+	for(int n=0;n<8;n++)
+	{
+		i=config[n][0];
+		j=config[n][1];
+		k=config[n][2];
+		if((st[i]!=-1)&&(st[i]==st[j])&&(st[i]==st[k]))
 		{
-			switch(i%3)
-			{
-				case 0:
-					for(int j=1;j<=4;j++)
-					{
-						if(j!=2)
-						{
-							if(st[i]==st[i+j]&&st[i]==st[i+2*j])
-							{
-								winner=st[i];
-								done=1;
-								break;
-							}
-						}
-					}
-					break;
-				case 1:
-					if(st[i]==st[i+3]&&st[i]==st[i+6])
-					{
-						winner=st[i];
-						done=1;
-					}
-					break;
-				default:
-					for(int j=2;j<=3;j++)
-					{
-						if(st[i]==st[i+j]&&st[i]==st[i+2*j])
-						{
-							winner=st[i];
-							done=1;
-							break;
-						}
-					}
-			}
-			if(done)
-			{
-				break;
-			}
+			winner=st[i];
+			break;
 		}
 	}
 	return winner;
@@ -148,8 +126,8 @@ int havewon(int* st)
 char two()
 {
 	int* state;
-	state=malloc(sizeof(int)*16);
-	for(int i=0;i<16;i++)
+	state=malloc(sizeof(int)*9);
+	for(int i=0;i<9;i++)
 	{
 		state[i]=-1;
 	}
@@ -174,8 +152,8 @@ char two()
 void aiinput(int* st,int ur)
 {
 	int* tempstate;
-	tempstate=malloc(sizeof(int)*16);
-	for(int i=0;i<16;i++)
+	tempstate=malloc(sizeof(int)*9);
+	for(int i=0;i<9;i++)
 	{
 		tempstate[i]=st[i];
 	}
@@ -238,8 +216,8 @@ void aiinput(int* st,int ur)
 char ai()
 {
 	int* state;
-	state=malloc(sizeof(int)*16);
-	for(int i=0;i<16;i++)
+	state=malloc(sizeof(int)*9);
+	for(int i=0;i<9;i++)
 	{
 		state[i]=-1;
 	}
