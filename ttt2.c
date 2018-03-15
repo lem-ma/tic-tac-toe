@@ -9,8 +9,8 @@ provided the copyright notice and this notice are preserved.  This file is offer
 void version()
 {
 	int MainVersion=2;
-	int SubVersion=1;
-	char Build='d';
+	int SubVersion=2;
+	char Build=' ';
 	printf("Welcome to TIC-TAC-TOE version %d.%d%c\nAuthor: BAI (lem-ma on GitHub)\n",MainVersion,SubVersion,Build);
 }
 
@@ -67,16 +67,41 @@ void printboard(int* st,int rd)
 	printf("____________________________\n");
 }
 
+char getf()
+{
+	size_t length=1;
+	char* strr;
+	strr=(char*)malloc(sizeof(char)*length);
+	strr[0]=' ';
+	int i=0;
+	int c;
+	while(((c=getchar())!=EOF)&&(c!=10))
+	{
+		if(i==length)
+		{
+			length+=16;
+			strr=(char*)realloc(strr,sizeof(char)*length);
+		}
+		strr[i]=(char)c;
+		i++;
+	}
+	int t=strr[0];
+	free(strr);
+	return t;
+}
+
 void getinput(int* st,int rd)
 {
 	printf("Please choose a place by enter a number from 1 to 9.\n");
 	int uenter;
+	int testdigit;
 	char invalid=1;
 	while(invalid)
 	{
-		scanf("%d",&uenter);
-		if(uenter<=9&&uenter>=1)
+		testdigit=(int)getf();
+		if(testdigit>48&&testdigit<58)
 		{
+			uenter=testdigit-48;
 			if(st[uenter-1]==-1)
 			{
 				st[uenter-1]=rd%2;
@@ -98,7 +123,7 @@ int havewon(int* st)
 {
 	int winner=-1;
 	int i,j,k;
-	int config[8][3]=
+	const int config[8][3]=
 	{
 		{0,1,2},
 		{3,4,5},
@@ -198,7 +223,7 @@ void aiinput(int* st,int ur)
 	}
 	if(!done)
 	{
-		int choice[]={4,0,2,6,8,1,3,5,7};
+		const int choice[]={4,0,2,6,8,1,3,5,7};
 		int j;
 		for(int i=0;i<9;i++)
 		{
@@ -222,24 +247,27 @@ char ai()
 		state[i]=-1;
 	}
 	printf("Do you want to be \"O\" (go first)? If so, enter \"1\", enter any other key otherwise.");
-	int tt;
-	scanf("%d",&tt);
-	if(tt!=1)
+	char tt=getf();
+	if(tt!='1')
 	{
 		tt=0;
+	}
+	else
+	{
+		tt=1;
 	}
 	int round=1;
 	int result=-1;
 	while(round<10)
 	{
-		if(tt==round%2)
+		if((int)tt==round%2)
 		{
 			printboard(state,round);
 			getinput(state,round);
 		}
 		else
 		{
-			aiinput(state,tt);
+			aiinput(state,(int)tt);
 		}
 		if(havewon(state)!=-1)
 		{
@@ -255,10 +283,9 @@ char ai()
 
 void game()
 {
-	char mode;
 	char win;
 	printf("Enter \"m\" for gaming with the machine, enter any other key otherwise.\n");
-	scanf("%c",&mode);
+	char mode=getf();
 	switch(mode)//for further extensions
 	{
 		case 'm':
@@ -286,11 +313,9 @@ int main(void)
 	{
 		game();
 		printf("Enter \"n\" to exist, enter any other key to start a new game.\n");
-		getchar();
-		scanf("%c",&resp);
+		resp=getf();
 	}
 	printf("Thanks for gaming. Enter any key to continue.\n");
-	getchar();
 	getchar();
 	return 0;
 }
