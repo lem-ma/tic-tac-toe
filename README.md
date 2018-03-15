@@ -7,7 +7,7 @@ By not typing in "m", you will be able to call the two-person gameboard, which w
 2. The AI system.
 There is a single-player system embedded, which allows the user to play with the machine, who should not lose in theory. Enter "m" when you are asked to in order to activate this feature. The input method is the same as above.
 
-However, the validity of the type of your input is not checked. Errors are expected to occur whenever the user is not following the instructions given by the program.
+It is able to check input validity from version 2.2.
 
 Any potential amendments are appreciated, contact me at bzy20010519@hotmail.com . You are advised to call me "BAI" which is easier to type (and was used most often by my friends).
 
