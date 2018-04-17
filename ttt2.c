@@ -9,7 +9,7 @@ provided the copyright notice and this notice are preserved.  This file is offer
 void version()
 {
 	int MainVersion=2;
-	int SubVersion=2;
+	int SubVersion=3;
 	char Build=' ';
 	printf("Welcome to TIC-TAC-TOE version %d.%d%c\nAuthor: BAI (lem-ma on GitHub)\n",MainVersion,SubVersion,Build);
 }
@@ -69,25 +69,19 @@ void printboard(int* st,int rd)
 
 char getf()
 {
-	size_t length=1;
-	char* strr;
-	strr=(char*)malloc(sizeof(char)*length);
-	strr[0]=' ';
-	int i=0;
+	char letter;
+	letter=' ';
 	int c;
+	int i=1;
 	while(((c=getchar())!=EOF)&&(c!=10))
 	{
-		if(i==length)
+		if(i==1)
 		{
-			length+=16;
-			strr=(char*)realloc(strr,sizeof(char)*length);
+			letter=(char)c;
+			i=0;
 		}
-		strr[i]=(char)c;
-		i++;
 	}
-	int t=strr[0];
-	free(strr);
-	return t;
+	return letter;
 }
 
 void getinput(int* st,int rd)
@@ -151,7 +145,7 @@ int havewon(int* st)
 char two()
 {
 	int* state;
-	state=malloc(sizeof(int)*9);
+	state=(int*)malloc(sizeof(int)*9);
 	for(int i=0;i<9;i++)
 	{
 		state[i]=-1;
@@ -177,7 +171,7 @@ char two()
 void aiinput(int* st,int ur)
 {
 	int* tempstate;
-	tempstate=malloc(sizeof(int)*9);
+	tempstate=(int*)malloc(sizeof(int)*9);
 	for(int i=0;i<9;i++)
 	{
 		tempstate[i]=st[i];
@@ -241,7 +235,7 @@ void aiinput(int* st,int ur)
 char ai()
 {
 	int* state;
-	state=malloc(sizeof(int)*9);
+	state=(int*)malloc(sizeof(int)*9);
 	for(int i=0;i<9;i++)
 	{
 		state[i]=-1;
